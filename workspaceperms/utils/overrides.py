@@ -23,6 +23,9 @@ def get_desk_sidebar_items_v2():
 	return final_result
 
 def load_desktop_data_v2(bootinfo):
-	bootinfo.allowed_workspaces = get_desk_sidebar_items_v2()
+	update_dictionary=[]
+	for d in get_desk_sidebar_items_v2():
+		update_dictionary.append(d.update({"category":"Modules"}))
+	bootinfo.allowed_workspaces = update_dictionary
 	bootinfo.module_page_map = get_controller("Workspace").get_module_page_map()
 	bootinfo.dashboards = frappe.get_all("Dashboard")
